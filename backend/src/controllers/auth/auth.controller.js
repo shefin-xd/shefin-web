@@ -691,7 +691,7 @@ export const deleteAccount = async (req, res) => {
 };
 
 // ---------------------------------------------------------------------------
-// PUT /api/auth/public-key
+// PUT /auth/public-key
 // ---------------------------------------------------------------------------
 export const savePublicKey = async (req, res) => {
   try {
@@ -707,7 +707,7 @@ export const savePublicKey = async (req, res) => {
 };
 
 // ---------------------------------------------------------------------------
-// GET /api/auth/public-key/:userId
+// GET /auth/public-key/:userId
 // ---------------------------------------------------------------------------
 export const getPublicKey = async (req, res) => {
   try {
@@ -739,7 +739,14 @@ export const getPublicUserByUsername = async (req, res) => {
 // ---------------------------------------------------------------------------
 export const logout = (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
+    const cookieDomain = process.env.COOKIE_DOMAIN?.trim();
+    res.cookie("jwt", "", {
+      maxAge: 0,
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV !== "development",
+      ...(cookieDomain ? { domain: cookieDomain } : {}),
+    });
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.error("Error in logout controller:", error.message);
