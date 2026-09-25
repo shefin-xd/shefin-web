@@ -23,7 +23,7 @@ if (existingSession) window.location.replace(destination);
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   message.textContent = "Signing in…";
-  const response = await fetch(apiUrl("/api/auth/login"), {
+  const response = await fetch(apiUrl("/auth/login"), {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },

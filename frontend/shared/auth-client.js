@@ -10,7 +10,7 @@ const AUTH_ORIGIN = window.SHEFIN_AUTH_ORIGIN || "https://auth.shefin.dev";
 export const apiUrl = (path) => `${API_ORIGIN}${path}`;
 
 export async function getSession() {
-  const response = await fetch(apiUrl("/api/auth/check"), { credentials: "include" });
+  const response = await fetch(apiUrl("/auth/check"), { credentials: "include" });
   if (!response.ok) return null;
   return response.json();
 }
@@ -22,7 +22,7 @@ export function beginSignIn(returnTo = window.location.href) {
 }
 
 export async function signOut() {
-  await fetch(apiUrl("/api/auth/logout"), {
+  await fetch(apiUrl("/auth/logout"), {
     method: "POST",
     credentials: "include",
   });

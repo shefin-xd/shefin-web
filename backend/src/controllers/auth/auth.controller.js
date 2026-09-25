@@ -691,7 +691,7 @@ export const deleteAccount = async (req, res) => {
 };
 
 // ---------------------------------------------------------------------------
-// PUT /api/auth/public-key
+// PUT /auth/public-key
 // ---------------------------------------------------------------------------
 export const savePublicKey = async (req, res) => {
   try {
@@ -707,7 +707,7 @@ export const savePublicKey = async (req, res) => {
 };
 
 // ---------------------------------------------------------------------------
-// GET /api/auth/public-key/:userId
+// GET /auth/public-key/:userId
 // ---------------------------------------------------------------------------
 export const getPublicKey = async (req, res) => {
   try {

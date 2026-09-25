@@ -12,7 +12,7 @@ if (!session) {
   signOutButton.hidden = false;
 }
 loadChat.addEventListener("click", async () => {
-  const response = await fetch(apiUrl("/api/chat/users"), { credentials: "include" });
+  const response = await fetch(apiUrl("/chat/users"), { credentials: "include" });
   status.textContent = response.ok ? "Chat API access confirmed." : "Unable to load conversations.";
 });
 signOutButton.addEventListener("click", async () => { await signOut(); beginSignIn(window.location.href); });

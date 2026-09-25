@@ -52,7 +52,7 @@ export const searchUsersByUsername = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// GET /api/messages/users
+// GET /chat/users
 // Returns every user except the requester, with an unread-message
 // count attached so the sidebar can render badges without a
 // separate request.
@@ -139,7 +139,7 @@ export const getUsersForSidebar = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// GET /api/messages/:id
+// GET /chat/:id
 // Fetches the full conversation between the requester and user :id.
 // Also auto-marks all unread incoming messages as delivered + read
 // and notifies the sender via socket so double-ticks update.
@@ -203,7 +203,7 @@ export const getMessages = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// POST /api/messages/send/:id
+// POST /chat/send/:id
 //
 // Supports two paths:
 //
@@ -342,7 +342,7 @@ export const sendMessage = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// PATCH /api/messages/read/:id
+// PATCH /chat/read/:id
 // Marks all unread messages from user :id as read and notifies
 // them via socket. Called when the user opens a conversation.
 // ─────────────────────────────────────────────────────────────
@@ -380,7 +380,7 @@ export const markMessagesAsRead = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// PATCH /api/messages/edit/:id
+// PATCH /chat/edit/:id
 // Lets the original sender edit text messages. For encrypted messages the
 // client sends a fresh encryptedContent blob so plaintext never reaches the
 // server. Both participants receive a real-time messageEdited event.
@@ -440,7 +440,7 @@ export const editMessage = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// DELETE /api/messages/:id
+// DELETE /chat/:id
 //
 // Two modes:
 //   deleteForEveryone: true  — sender only; wipes content for both parties.
@@ -513,7 +513,7 @@ export const deleteMessage = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// GET /api/messages/unread
+// GET /chat/unread
 // Returns a map of { [senderId]: unreadCount } for the requester.
 // Used to seed badge counts in the sidebar without re-fetching all users.
 // ─────────────────────────────────────────────────────────────
@@ -545,7 +545,7 @@ export const getUnreadCounts = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// PATCH /api/messages/star/:id
+// PATCH /chat/star/:id
 // Toggles the requester's starred state for one message. StarredBy is kept
 // on the message so the state follows the user across devices.
 // ─────────────────────────────────────────────────────────────
@@ -608,7 +608,7 @@ export const starMessage = async (req, res) => {
 };
 
 // ─────────────────────────────────────────────────────────────
-// PATCH /api/messages/react/:id
+// PATCH /chat/react/:id
 // Adds, replaces, or removes (toggles) the requester's emoji reaction
 // on a message. Both conversation participants are notified via socket.
 // ─────────────────────────────────────────────────────────────

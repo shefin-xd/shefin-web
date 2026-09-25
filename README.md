@@ -7,17 +7,17 @@ This repository is organized as a small, centralized Shefin ecosystem: one API a
 | Domain | Responsibility |
 | --- | --- |
 | `auth.shefin.dev` | The account sign-in experience and the only place users enter credentials. |
-| `api.shefin.dev` | Central API and session authority. Routes are product namespaces: `/api/auth/*`, `/api/admin/*`, and `/api/chat/*`. |
-| `admin.shefin.dev` | Admin frontend. It redirects to the account app when no session exists, then uses `/api/admin/*`. |
-| `chat.shefin.dev` | Chat frontend. It redirects to the account app when no session exists, then uses `/api/chat/*`. |
+| `api.shefin.dev` | Central API and session authority. Routes are product namespaces: `/auth/*`, `/admin/*`, and `/chat/*`. |
+| `admin.shefin.dev` | Admin frontend. It redirects to the account app when no session exists, then uses `/admin/*`. |
+| `chat.shefin.dev` | Chat frontend. It redirects to the account app when no session exists, then uses `/chat/*`. |
 
-The old `/api/messages/*` namespace remains as a compatibility alias during migration; new chat clients must use `/api/chat/*`.
+The old `/messages/*` namespace remains as a compatibility alias during migration; new chat clients must use `/chat/*`.
 
 ## Sign-in journey (SSO-style)
 
-1. A product app calls `GET https://api.shefin.dev/api/auth/check` with `credentials: "include"`.
+1. A product app calls `GET https://api.shefin.dev/auth/check` with `credentials: "include"`.
 2. If there is no session, it navigates to `https://auth.shefin.dev?returnTo=<current-app-url>`.
-3. The Auth app signs in via `POST /api/auth/login`. The API issues the httpOnly `jwt` cookie.
+3. The Auth app signs in via `POST /auth/login`. The API issues the httpOnly `jwt` cookie.
 4. Auth validates that `returnTo` is an HTTPS `*.shefin.dev` URL and redirects there. The product can now call its own API namespace.
 
 No frontend reads or stores a JWT. This prevents browser JavaScript from accidentally exposing the session token.

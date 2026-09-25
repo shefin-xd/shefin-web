@@ -30,11 +30,13 @@ app.use(cors(corsOptions));
 app.use((req, res, next) => {
   // Disable intermediary/proxy caching for API responses that may contain
   // profile, message, or admin data. Static assets keep their normal caching.
-  if (req.path.startsWith("/api/")) res.setHeader("Cache-Control", "no-store");
+  if (["/auth", "/admin", "/chat", "/messages", "/health"].some((prefix) => req.path.startsWith(prefix))) {
+    res.setHeader("Cache-Control", "no-store");
+  }
   next();
 });
 
-app.get("/api/health", (req, res) => {
+app.get("/health", (req, res) => {
   res.status(200).json({
     success: true,
     status: "ok",
@@ -44,13 +46,14 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/admin", adminRoutes);
-// Each product owns a stable API namespace. Keep `/messages` temporarily so
-// existing chat clients do not break while they move to `/chat`.
-app.use("/api/chat", maintenanceGate, messageRoutes);
-app.use("/api/messages", maintenanceGate, messageRoutes);
-app.use("/api", notFoundHandler);
+// api.shefin.dev already identifies the API host, so product namespaces do
+// not repeat an `/api` path prefix.
+app.use("/auth", authRoutes);
+app.use("/admin", adminRoutes);
+// Keep `/messages` temporarily so existing chat clients do not break while
+// they move to the product-oriented `/chat` namespace.
+app.use("/chat", maintenanceGate, messageRoutes);
+app.use("/messages", maintenanceGate, messageRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
