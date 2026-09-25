@@ -8,9 +8,9 @@ import cron from "node-cron";
 import { connectDB } from "./lib/db.js";
 import { deleteUnverifiedAccounts } from "./lib/cleanup.js";
 
-import authRoutes from "./routes/auth.route.js";
-import messageRoutes from "./routes/message.route.js";
-import adminRoutes from "./routes/admin.route.js";
+import authRoutes from "./routes/auth/auth.route.js";
+import messageRoutes from "./routes/chat-app/message.route.js";
+import adminRoutes from "./routes/admin/admin.route.js";
 import { app, clearStalePresence, server } from "./lib/socket.js";
 import { corsOptions, applySecurityHeaders } from "./config/security.js";
 import { attachRequestContext, errorHandler, notFoundHandler } from "./middleware/error.middleware.js";
