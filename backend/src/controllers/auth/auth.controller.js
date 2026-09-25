@@ -739,7 +739,14 @@ export const getPublicUserByUsername = async (req, res) => {
 // ---------------------------------------------------------------------------
 export const logout = (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
+    const cookieDomain = process.env.COOKIE_DOMAIN?.trim();
+    res.cookie("jwt", "", {
+      maxAge: 0,
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV !== "development",
+      ...(cookieDomain ? { domain: cookieDomain } : {}),
+    });
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.error("Error in logout controller:", error.message);
