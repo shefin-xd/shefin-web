@@ -46,6 +46,9 @@ app.get("/api/health", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
+// Each product owns a stable API namespace. Keep `/messages` temporarily so
+// existing chat clients do not break while they move to `/chat`.
+app.use("/api/chat", maintenanceGate, messageRoutes);
 app.use("/api/messages", maintenanceGate, messageRoutes);
 app.use("/api", notFoundHandler);
 
