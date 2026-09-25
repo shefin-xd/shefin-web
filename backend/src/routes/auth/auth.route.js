@@ -1,7 +1,7 @@
 import express from "express";
-import { checkAuth, login, logout, signup, verifyEmail, updateEmail, resendOtp, deleteAccount, updateProfile, savePublicKey, getPublicKey, updatePrivacySettings, forgotPassword, resetPassword, changePassword, getPublicUserByUsername } from "../controllers/auth/auth.controller.js";
-import { protectRoute } from "../middleware/auth.middleware.js";
-import { createRateLimiter } from "../middleware/rateLimit.middleware.js";
+import { checkAuth, login, logout, signup, verifyEmail, updateEmail, resendOtp, deleteAccount, updateProfile, savePublicKey, getPublicKey, updatePrivacySettings, forgotPassword, resetPassword, changePassword, getPublicUserByUsername } from "../../controllers/auth/auth.controller.js";
+import { protectRoute } from "../../middleware/auth.middleware.js";
+import { createRateLimiter } from "../../middleware/rateLimit.middleware.js";
 
 const router = express.Router();
 

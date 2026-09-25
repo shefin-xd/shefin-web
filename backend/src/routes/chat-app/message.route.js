@@ -1,6 +1,6 @@
 import express from "express";
-import { protectRoute } from "../middleware/auth.middleware.js";
-import { createRateLimiter } from "../middleware/rateLimit.middleware.js";
+import { protectRoute } from "../../middleware/auth.middleware.js";
+import { createRateLimiter } from "../../middleware/rateLimit.middleware.js";
 import {
   getMessages,
   getUsersForSidebar,
@@ -20,7 +20,7 @@ import {
   leaveGroup,
   getPublicGroupInvite,
   joinGroupByInvite,
-} from "../controllers/chat-app/message.controller.js";
+} from "../../controllers/chat-app/message.controller.js";
 
 const router = express.Router();
 

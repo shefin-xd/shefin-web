@@ -1,7 +1,7 @@
 import express from "express";
-import { deleteUserByAdmin, exportUserDataByAdmin, getAdminDashboard, sendAnnouncementByAdmin, updateMaintenance, updateUserByAdmin } from "../controllers/admin/admin.controller.js";
-import { protectRoute } from "../middleware/auth.middleware.js";
-import { requireAdmin } from "../middleware/admin.middleware.js";
+import { deleteUserByAdmin, exportUserDataByAdmin, getAdminDashboard, sendAnnouncementByAdmin, updateMaintenance, updateUserByAdmin } from "../../controllers/admin/admin.controller.js";
+import { protectRoute } from "../../middleware/auth.middleware.js";
+import { requireAdmin } from "../../middleware/admin.middleware.js";
 
 const router = express.Router();
 
